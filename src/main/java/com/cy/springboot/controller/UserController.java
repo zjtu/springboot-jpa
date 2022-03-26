@@ -69,4 +69,11 @@ public class UserController {
         userService.updateUser(user);
         return Result.success();
     }
+
+    @RequestMapping(value = "updatePasswordByUsername")
+    @ApiOperation(value = "根据id更改用户名",notes = "根据id更改用户名")
+    public Result updatePasswordByUsername(@RequestParam String username,@RequestParam Integer id)   {
+        int i = userRepository.updatePasswordByUsername(username, id);
+        return Result.success(i);
+    }
 }
