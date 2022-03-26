@@ -31,7 +31,7 @@ public class Swagger2Config {
                 // 页面标题
                 .title("Spring Boot 测试使用 Swagger2 构建RESTful API")
                 // 创建人信息
-                .contact(new Contact("Gary", "https://blog.csdn.net/weixin_42334396/article/details/106172978", "1175171518@qq.com"))
+                .contact(new Contact("Tao", "https://github.com/zjtu/springboot-jpa", "1064432866@qq.com"))
                 // 版本号
                 .version("1.0")
                 // 描述
