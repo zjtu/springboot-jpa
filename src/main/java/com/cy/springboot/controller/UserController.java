@@ -1,8 +1,11 @@
 package com.cy.springboot.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.cy.springboot.pojo.User;
 import com.cy.springboot.repository.UserRepository;
 import com.cy.springboot.service.IUserService;
+import com.cy.springboot.util.PageUtil;
 import com.cy.springboot.util.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -10,6 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -34,6 +39,14 @@ public class UserController {
         return Result.success(save);
     }
 
+    @GetMapping("/page")
+    @ApiOperation(value = "分页查询",notes = "分页查询")
+    public JSONObject getAllByMyPage(HttpServletRequest req, HttpServletResponse resp, @RequestParam("page") int page, @RequestParam("size") int size){
+        PageUtil myPage = userService.findAllStudentByMyPage(page, size);
+        JSONObject jsonObject = (JSONObject) JSON.toJSON(myPage);
+        return jsonObject;
+    }
+
     @GetMapping(value = "findById/{id}")
     @ApiOperation(value = "根据id获取用户信息",notes = "根据id获取用户信息")
     public Result getUser(@PathVariable Integer id){
@@ -44,7 +57,7 @@ public class UserController {
     @GetMapping(value = "findAll")
     @ApiOperation(value = "查询所有用户",notes = "查询所有用户")
     public Result findAll(){
-        List<User> all = userRepository.findAll();
+        List<User> all = userService.findAllUser();
         return Result.success(all);
     }
 
